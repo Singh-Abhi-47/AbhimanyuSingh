@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # Set this to your default branch (main or master)
+      - main  # Replace with your default branch
 
 jobs:
   deploy:
@@ -11,21 +11,23 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Use the latest version
+        uses: actions/checkout@v3  # Latest version
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Use the latest version
+        uses: actions/setup-node@v3  # Latest version
         with:
-          node-version: '20'  # Use Node.js 20 to avoid deprecation issues
+          node-version: '20'  # Ensure you are using Node.js 20
 
       - name: Install dependencies
-        run: npm install  # Use this if you have dependencies to install
+        run: |
+          npm install  # Include this if you have a package.json
 
-      - name: Build
-        run: npm run build  # Run the build command if necessary
+      - name: Build project
+        run: |
+          npm run build  # Include this if you have a build script
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3  # Latest version
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Change this if your index.html is in a subfolder
+          publish_dir: ./  # Ensure this points to your output directory
